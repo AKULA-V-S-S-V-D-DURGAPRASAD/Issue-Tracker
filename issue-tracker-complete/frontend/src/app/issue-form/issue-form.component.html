@@ -1,0 +1,11 @@
+<div class="card" style="max-width:700px;">
+  <h3>{{ editing ? 'Edit Issue' : 'Create Issue' }}</h3>
+  <div class="form-row"><label>Title</label><input class="input" [(ngModel)]="issue.title" /></div>
+  <div class="form-row"><label>Description</label><textarea class="input" rows="4" [(ngModel)]="issue.description"></textarea></div>
+  <div style="display:flex;gap:12px;">
+    <div class="form-row" style="flex:1"><label>Status</label><select class="input" [(ngModel)]="issue.status"><option>Open</option><option>In Progress</option><option>Closed</option></select></div>
+    <div class="form-row" style="flex:1"><label>Priority</label><select class="input" [(ngModel)]="issue.priority"><option>Low</option><option>Medium</option><option>High</option></select></div>
+    <div class="form-row" style="flex:1"><label>Assignee</label><input class="input" [(ngModel)]="issue.assignee" /></div>
+  </div>
+  <div style="margin-top:12px;"><button class="btn-primary" (click)="save()">{{ editing ? 'Update' : 'Create' }}</button></div>
+</div>

@@ -1,0 +1,99 @@
+{
+  "info": {
+    "name": "Issue Tracker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "List Issues",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/issues",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "issues"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Issue",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": \"Postman issue\", \"description\": \"from postman\", \"status\": \"Open\", \"priority\": \"High\", \"assignee\": \"Postman\"}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/issues",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "issues"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update Issue (replace id)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": \"Updated\", \"description\": \"updated\", \"status\": \"Closed\", \"priority\": \"Low\", \"assignee\": \"Postman\"}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/issues/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "issues",
+            "1"
+          ]
+        }
+      }
+    }
+  ]
+}

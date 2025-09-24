@@ -1,0 +1,75 @@
+<div class="card">
+  <div class="controls">
+    <input type="text" [(ngModel)]="search" placeholder="Search title..." />
+    <select [(ngModel)]="status">
+      <option *ngFor="let s of statuses" [value]="s">{{ s || 'All Status' }}</option>
+    </select>
+    <select [(ngModel)]="priority">
+      <option *ngFor="let p of priorities" [value]="p">{{ p || 'All Priority' }}</option>
+    </select>
+    <input type="text" [(ngModel)]="assignee" placeholder="Assignee" />
+    <button (click)="load()">Apply</button>
+    <button class="btn-ghost" (click)="clearFilters()">Clear</button>
+    <div style="margin-left:auto;display:flex;gap:8px;">
+      <button (click)="gotoCreate()" class="btn-primary">Create Issue</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th (click)="toggleSort('id')">ID</th>
+          <th (click)="toggleSort('title')">Title</th>
+          <th (click)="toggleSort('status')">Status</th>
+          <th (click)="toggleSort('priority')">Priority</th>
+          <th (click)="toggleSort('assignee')">Assignee</th>
+          <th (click)="toggleSort('updatedAt')">Updated At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let issue of issues" (click)="openDetail(issue)">
+          <td>{{issue.id}}</td>
+          <td>{{issue.title}}</td>
+          <td><span class="badge" [ngClass]="{'high':issue.priority==='High','medium':issue.priority==='Medium','low':issue.priority==='Low'}">{{issue.status}}</span></td>
+          <td>{{issue.priority}}</td>
+          <td>{{issue.assignee}}</td>
+          <td>{{issue.updatedAt | date:'short'}}</td>
+          <td class="row-actions"><button (click)="$event.stopPropagation(); gotoEdit(issue.id)">Edit</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <div class="small">Showing {{issues.length}} issues</div>
+    <div class="pager">
+      <button (click)="page = page-1; if(page<1)page=1; load()">Prev</button>
+      <span>Page {{page}}</span>
+      <button (click)="page = page+1; load()">Next</button>
+      <select [(ngModel)]="pageSize" (change)="page=1; load()">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Drawer -->
+<div *ngIf="showDrawer && selectedIssue" class="detail-drawer card">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <h3 style="margin:0">Issue #{{selectedIssue.id}}</h3>
+    <div><button (click)="closeDrawer()">Close</button></div>
+  </div>
+  <div style="margin-bottom:8px;"><strong>{{selectedIssue.title}}</strong></div>
+  <div class="small" style="margin-bottom:8px;">Updated: {{selectedIssue.updatedAt | date:'medium'}}</div>
+  <div style="margin-bottom:12px;">{{selectedIssue.description}}</div>
+  <div style="display:flex;gap:8px;margin-bottom:12px;">
+    <div><strong>Status</strong><div>{{selectedIssue.status}}</div></div>
+    <div><strong>Priority</strong><div>{{selectedIssue.priority}}</div></div>
+    <div><strong>Assignee</strong><div>{{selectedIssue.assignee}}</div></div>
+  </div>
+  <div><pre>{{selectedIssue | json}}</pre></div>
+</div>

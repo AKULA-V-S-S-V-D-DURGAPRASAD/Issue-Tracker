@@ -1,0 +1,38 @@
+{
+  "$schema": "https://angular.io/cli/schema.json",
+  "version": 1,
+  "projects": {
+    "issue-tracker-frontend": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/issue-tracker-frontend",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "issue-tracker-frontend:build"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "issue-tracker-frontend"
+}
